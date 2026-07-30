@@ -7,30 +7,37 @@
 </head>
 <body>
 
-    <div>
+    <div style="text-align: center; padding: 20px; font-family: Arial, sans-serif;">
         <!-- এআই ডিজাইন ইমেজ দেখানোর জন্য -->
-        <img id="designImage" src="" alt="AI Generated Design" style="max-width: 100%; border-radius: 8px;" />
+        <img id="designImage" src="" alt="AI Generated Design" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
         
         <!-- পণ্যের বিবরণ বা প্রম্পট দেখানোর জন্য -->
-        <p id="productDetails">Loading design...</p>
+        <p id="productDetails" style="margin-top: 15px; font-size: 16px; color: #333; line-height: 1.5;">Loading design...</p>
     </div>
 
     <script>
-        // এখানে সঠিক ফোল্ডারের লিংকটি বসানো হলো
         const rawUrl = "https://raw.githubusercontent.com/jounayada-creator/ai-app-project/refs/heads/main/data/design.json";
 
         fetch(rawUrl)
             .then(response => response.json())
             .then(data => {
-                // গিটহাবের JSON থেকে imageUrl বসাবে
-                document.getElementById('designImage').src = data.imageUrl;
+                // গিটহাবের JSON থেকে imageUrl বসাবে (যদি থাকে)
+                if (data.imageUrl) {
+                    document.getElementById('designImage').src = data.imageUrl;
+                }
                 
-                // প্রম্পটের টেক্সট বসানোর জন্য data.prompt ব্যবহার করা হলো
-                document.getElementById('productDetails').innerText = data.prompt;
+                // প্রম্পটের টেক্সট বা বিবরণ বসানোর জন্য চেক করবে
+                if (data.prompt) {
+                    document.getElementById('productDetails').innerText = data.prompt;
+                } else if (data.test) {
+                    document.getElementById('productDetails').innerText = "Test Mode: " + data.test;
+                } else {
+                    document.getElementById('productDetails').innerText = "Design concept loaded successfully.";
+                }
             })
             .catch(error => {
                 console.error('Error fetching design:', error);
-                document.getElementById('productDetails').innerText = 'Failed to load design.';
+                document.getElementById('productDetails').innerText = 'Failed to load design data.';
             });
     </script>
 
