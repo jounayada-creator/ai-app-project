@@ -16,7 +16,7 @@
     </div>
 
     <script>
-        const rawUrl = "https://raw.githubusercontent.com/jounayada-creator/ai-app-project/refs/heads/main/data/design.json";
+        const rawUrl = "https://raw.githubusercontent.com/jounayada-creator/ai-app-project/refs/heads/main/design-data.json";
 
         fetch(rawUrl)
             .then(response => response.json())
@@ -24,8 +24,8 @@
                 // গিটহাবের JSON থেকে imageUrl বসাবে
                 document.getElementById('designImage').src = data.imageUrl;
                 
-                // গিটহাবের JSON থেকে productDetails বা বিবরণ বসাবে
-                document.getElementById('productDetails').innerText = data.productDetails;
+                // প্রম্পটের টেক্সট বসানোর জন্য productDetails এর বদলে data.prompt ব্যবহার করা হলো
+                document.getElementById('productDetails').innerText = data.prompt;
             })
             .catch(error => {
                 console.error('Error fetching design:', error);
