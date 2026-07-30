@@ -16,7 +16,8 @@
     </div>
 
     <script>
-        const rawUrl = "https://raw.githubusercontent.com/jounayada-creator/ai-app-project/refs/heads/main/design-data.json";
+        // এখানে সঠিক ফোল্ডারের লিংকটি বসানো হলো
+        const rawUrl = "https://raw.githubusercontent.com/jounayada-creator/ai-app-project/refs/heads/main/data/design.json";
 
         fetch(rawUrl)
             .then(response => response.json())
@@ -24,7 +25,7 @@
                 // গিটহাবের JSON থেকে imageUrl বসাবে
                 document.getElementById('designImage').src = data.imageUrl;
                 
-                // প্রম্পটের টেক্সট বসানোর জন্য productDetails এর বদলে data.prompt ব্যবহার করা হলো
+                // প্রম্পটের টেক্সট বসানোর জন্য data.prompt ব্যবহার করা হলো
                 document.getElementById('productDetails').innerText = data.prompt;
             })
             .catch(error => {
